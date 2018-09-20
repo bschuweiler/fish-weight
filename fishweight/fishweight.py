@@ -62,7 +62,7 @@ CONVERSION_SYSTEMS = [
 
 
 # Returns bool
-def convertibleToFloat(value):
+def convertibleToFloat(value) -> bool:
     try:
         float(value)
         return True
@@ -72,7 +72,7 @@ def convertibleToFloat(value):
 
 # No return, throws ValueError if there
 # is an issue with the arguments
-def checkArgs(species, length):
+def checkArgs(species, length) -> str:
     # Is the species one we handle
     if species not in SPECIES_DETAILS.keys():
         raise ValueError('Species is not one of {0}'.format(
@@ -99,7 +99,7 @@ def checkArgs(species, length):
         raise ValueError('Length argument is not whole or quarter value')
 
 
-def lengthToWeight(species, length):
+def lengthToWeight(species, length) -> str:
     checkArgs(species, length)
 
     # Strip trailing zeros (and decimal if whole number)
