@@ -36,17 +36,17 @@ SMALLMOUTH_LENGTH_LOWER_LIMIT = 6
 SMALLMOUTH_LENGTH_UPPER_LIMIT = 25
 
 SPECIES_DETAILS = {
-    'Walleye': {
+    'walleye': {
         'file': 'data/walleye.json',
         'lower': WALLEYE_LENGTH_LOWER_LIMIT,
         'upper': WALLEYE_LENGTH_UPPER_LIMIT
     },
-    'Northern': {
+    'northern': {
         'file': 'data/northern.json',
         'lower': NORTHERN_LENGTH_LOWER_LIMIT,
         'upper': NORTHERN_LENGTH_UPPER_LIMIT
     },
-    'Smallmouth': {
+    'smallmouth': {
         'file': 'data/smallmouth.json',
         'lower': SMALLMOUTH_LENGTH_LOWER_LIMIT,
         'upper': SMALLMOUTH_LENGTH_UPPER_LIMIT

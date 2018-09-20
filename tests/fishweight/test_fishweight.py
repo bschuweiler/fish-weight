@@ -20,33 +20,37 @@ class FishWeightTest(unittest.TestCase):
         self.assertFalse(fishweight.convertibleToFloat(None))
 
     def test_checkArgs_valid_walleye(self):
-        fishweight.checkArgs('Walleye', '23.25')
-        fishweight.checkArgs('Walleye', '14')
-        fishweight.checkArgs('Walleye', '28.5')
-        fishweight.checkArgs('Walleye', '21.50')
-        fishweight.checkArgs('Walleye', '16.75')
+        fishweight.checkArgs('walleye', '23.25')
+        fishweight.checkArgs('walleye', '14')
+        fishweight.checkArgs('walleye', '28.5')
+        fishweight.checkArgs('walleye', '21.50')
+        fishweight.checkArgs('walleye', '16.75')
 
     def test_checkArgs_valid_northern(self):
-        fishweight.checkArgs('Northern', '23.25')
-        fishweight.checkArgs('Northern', '14')
-        fishweight.checkArgs('Northern', '28.5')
-        fishweight.checkArgs('Northern', '21.50')
-        fishweight.checkArgs('Northern', '16.75')
+        fishweight.checkArgs('northern', '23.25')
+        fishweight.checkArgs('northern', '14')
+        fishweight.checkArgs('northern', '28.5')
+        fishweight.checkArgs('northern', '21.50')
+        fishweight.checkArgs('northern', '16.75')
 
     def test_checkArgs_valid_smallmouth(self):
-        fishweight.checkArgs('Smallmouth', '23.25')
-        fishweight.checkArgs('Smallmouth', '14')
-        fishweight.checkArgs('Smallmouth', '7.5')
-        fishweight.checkArgs('Smallmouth', '21.50')
-        fishweight.checkArgs('Smallmouth', '16.75')
+        fishweight.checkArgs('smallmouth', '23.25')
+        fishweight.checkArgs('smallmouth', '14')
+        fishweight.checkArgs('smallmouth', '7.5')
+        fishweight.checkArgs('smallmouth', '21.50')
+        fishweight.checkArgs('smallmouth', '16.75')
 
     def test_checkArgs_invalid_species(self):
         with self.assertRaises(ValueError):
             fishweight.checkArgs('Small mouth', '23.25')
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('Walleye Pike', '23.25')
+            fishweight.checkArgs('walleye Pike', '23.25')
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('walleye', '23.25')
+            fishweight.checkArgs('Walleye', '23.25')
+        with self.assertRaises(ValueError):
+            fishweight.checkArgs('Northern', '23.25')
+        with self.assertRaises(ValueError):
+            fishweight.checkArgs('Smallmouth', '23.25')
         with self.assertRaises(ValueError):
             fishweight.checkArgs('Pike', '23.25')
         with self.assertRaises(ValueError):
@@ -55,78 +59,78 @@ class FishWeightTest(unittest.TestCase):
             fishweight.checkArgs(None, '23.25')
 
     def test_checkArgs_length_valid(self):
-        fishweight.checkArgs('Walleye', fishweight.WALLEYE_LENGTH_LOWER_LIMIT)
-        fishweight.checkArgs('Walleye', fishweight.WALLEYE_LENGTH_UPPER_LIMIT)
-        fishweight.checkArgs('Walleye', 21.00)
+        fishweight.checkArgs('walleye', fishweight.WALLEYE_LENGTH_LOWER_LIMIT)
+        fishweight.checkArgs('walleye', fishweight.WALLEYE_LENGTH_UPPER_LIMIT)
+        fishweight.checkArgs('walleye', 21.00)
         fishweight.checkArgs(
-            'Northern', fishweight.NORTHERN_LENGTH_LOWER_LIMIT)
+            'northern', fishweight.NORTHERN_LENGTH_LOWER_LIMIT)
         fishweight.checkArgs(
-            'Northern', fishweight.NORTHERN_LENGTH_UPPER_LIMIT)
-        fishweight.checkArgs('Northern', 28)
+            'northern', fishweight.NORTHERN_LENGTH_UPPER_LIMIT)
+        fishweight.checkArgs('northern', 28)
         fishweight.checkArgs(
-            'Smallmouth', fishweight.SMALLMOUTH_LENGTH_LOWER_LIMIT)
+            'smallmouth', fishweight.SMALLMOUTH_LENGTH_LOWER_LIMIT)
         fishweight.checkArgs(
-            'Smallmouth', fishweight.SMALLMOUTH_LENGTH_UPPER_LIMIT)
-        fishweight.checkArgs('Smallmouth', 17.75)
+            'smallmouth', fishweight.SMALLMOUTH_LENGTH_UPPER_LIMIT)
+        fishweight.checkArgs('smallmouth', 17.75)
 
     def test_checkArgs_length_invalid(self):
         with self.assertRaises(ValueError):
             fishweight.checkArgs(
-                'Walleye', fishweight.WALLEYE_LENGTH_LOWER_LIMIT-.25)
+                'walleye', fishweight.WALLEYE_LENGTH_LOWER_LIMIT-.25)
         with self.assertRaises(ValueError):
             fishweight.checkArgs(
-                'Walleye', fishweight.WALLEYE_LENGTH_UPPER_LIMIT+.25)
+                'walleye', fishweight.WALLEYE_LENGTH_UPPER_LIMIT+.25)
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('Walleye', None)
-        with self.assertRaises(ValueError):
-            fishweight.checkArgs(
-                'Northern', fishweight.NORTHERN_LENGTH_LOWER_LIMIT-1)
+            fishweight.checkArgs('walleye', None)
         with self.assertRaises(ValueError):
             fishweight.checkArgs(
-                'Northern', fishweight.NORTHERN_LENGTH_UPPER_LIMIT+1)
-        with self.assertRaises(ValueError):
-            fishweight.checkArgs('Northern', None)
+                'northern', fishweight.NORTHERN_LENGTH_LOWER_LIMIT-1)
         with self.assertRaises(ValueError):
             fishweight.checkArgs(
-                'Smallmouth', fishweight.SMALLMOUTH_LENGTH_LOWER_LIMIT-2.75)
+                'northern', fishweight.NORTHERN_LENGTH_UPPER_LIMIT+1)
+        with self.assertRaises(ValueError):
+            fishweight.checkArgs('northern', None)
         with self.assertRaises(ValueError):
             fishweight.checkArgs(
-                'Smallmouth', fishweight.SMALLMOUTH_LENGTH_UPPER_LIMIT+2.75)
+                'smallmouth', fishweight.SMALLMOUTH_LENGTH_LOWER_LIMIT-2.75)
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('Smallmouth', None)
+            fishweight.checkArgs(
+                'smallmouth', fishweight.SMALLMOUTH_LENGTH_UPPER_LIMIT+2.75)
+        with self.assertRaises(ValueError):
+            fishweight.checkArgs('smallmouth', None)
 
     def test_checkArgs_length_whole_or_quarter_valid(self):
-        fishweight.checkArgs('Walleye', 18)
-        fishweight.checkArgs('Walleye', 18.0)
-        fishweight.checkArgs('Walleye', 18.00)
-        fishweight.checkArgs('Walleye', 18.000)
-        fishweight.checkArgs('Walleye', 18.0000)
-        fishweight.checkArgs('Walleye', 18.25)
-        fishweight.checkArgs('Walleye', 18.250)
-        fishweight.checkArgs('Walleye', 18.2500)
-        fishweight.checkArgs('Walleye', 18.5)
-        fishweight.checkArgs('Walleye', 18.50)
-        fishweight.checkArgs('Walleye', 18.500)
-        fishweight.checkArgs('Walleye', 18.5000)
-        fishweight.checkArgs('Walleye', 18.75)
-        fishweight.checkArgs('Walleye', 18.750)
-        fishweight.checkArgs('Walleye', 18.7500)
+        fishweight.checkArgs('walleye', 18)
+        fishweight.checkArgs('walleye', 18.0)
+        fishweight.checkArgs('walleye', 18.00)
+        fishweight.checkArgs('walleye', 18.000)
+        fishweight.checkArgs('walleye', 18.0000)
+        fishweight.checkArgs('walleye', 18.25)
+        fishweight.checkArgs('walleye', 18.250)
+        fishweight.checkArgs('walleye', 18.2500)
+        fishweight.checkArgs('walleye', 18.5)
+        fishweight.checkArgs('walleye', 18.50)
+        fishweight.checkArgs('walleye', 18.500)
+        fishweight.checkArgs('walleye', 18.5000)
+        fishweight.checkArgs('walleye', 18.75)
+        fishweight.checkArgs('walleye', 18.750)
+        fishweight.checkArgs('walleye', 18.7500)
 
     def test_checkArgs_length_whole_or_quarter_invalid(self):
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('Walleye', 18.1)
+            fishweight.checkArgs('walleye', 18.1)
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('Walleye', 18.26)
+            fishweight.checkArgs('walleye', 18.26)
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('Walleye', 18.875)
+            fishweight.checkArgs('walleye', 18.875)
         with self.assertRaises(ValueError):
-            fishweight.checkArgs('Walleye', 18.625)
+            fishweight.checkArgs('walleye', 18.625)
 
     def test_lengthToWeight_happypaths(self):
-        fishweight.lengthToWeight('Walleye', '21.5')
-        fishweight.lengthToWeight('Walleye', '20.500')
-        fishweight.lengthToWeight('Northern', '22.25')
-        fishweight.lengthToWeight('Smallmouth', '17.0')
+        fishweight.lengthToWeight('walleye', '21.5')
+        fishweight.lengthToWeight('walleye', '20.500')
+        fishweight.lengthToWeight('northern', '22.25')
+        fishweight.lengthToWeight('smallmouth', '17.0')
 
 
 if __name__ == '__main__':
