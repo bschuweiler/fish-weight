@@ -1,27 +1,5 @@
 '''
 Fish Length to Weight converter.
-
-Supports lengths in quarter inch increments only.
-
-Utilizes data from:
-https://www.dnr.state.mn.us/fishing/regs.html
-https://dnr.wi.gov/topic/fishing/questions/estfishweight.html
-https://www.iowadnr.gov/Portals/idnr/uploads/fish/regs_fish.pdf
-http://www.swmnhunting.com/6783-2/
-https://gf.nd.gov/fishing/regulations-guide
-https://www.dec.ny.gov/outdoor/9222.html
-
-Returns JSON in the format:
-{
-    "Species": "Walleye",
-    "Length": "23.75",
-    "MN DNR Table": 5.225,
-    "Catch & Release Forumlas (WI and IA DNR)": 4.962,
-    "ND DNR Table": 4.95,
-    "NY DEC Table": 4.531,
-    "average": 4.917
-}
-
 '''
 import json
 import statistics
@@ -132,7 +110,7 @@ def lengthToWeight(species, length) -> str:
                 floatVals.append(floatVal)
 
         average = statistics.mean(floatVals)
-        result['average'] = average
+        result['Average'] = average
 
         return json.dumps(result)
 
