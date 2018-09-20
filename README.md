@@ -8,10 +8,15 @@ limited features and very sadly-incomplete species coverage.
 Utilizes data from:
 
 https://www.dnr.state.mn.us/fishing/regs.html
+
 https://dnr.wi.gov/topic/fishing/questions/estfishweight.html
+
 https://www.iowadnr.gov/Portals/idnr/uploads/fish/regs_fish.pdf
+
 http://www.swmnhunting.com/6783-2/
+
 https://gf.nd.gov/fishing/regulations-guide
+
 https://www.dec.ny.gov/outdoor/9222.html
 
 ... along with some linear interpolation to fill gaps
