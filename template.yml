@@ -3,6 +3,10 @@ Transform:
 - AWS::Serverless-2016-10-31
 - AWS::CodeStar
 
+Metadata:
+  CodeBuildImage: aws/codebuild/python:3.6.5
+  CodeBuildImageOverride: aws/codebuild/python:3.6.5
+
 Parameters:
   ProjectId:
     Type: String
