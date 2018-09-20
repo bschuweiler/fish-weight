@@ -1,0 +1,6 @@
+*.pyc
+.direnv
+.envrc
+.vscode
+.DS_store
+.Python
