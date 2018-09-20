@@ -31,7 +31,7 @@ Python 3.6
 Usage
 -----
 
-Weight lookup functionality is also self-contained in:
+Weight lookup functionality is self-contained in:
 
 ```
 fishweight.fishweight.lengthToWeight(species, length)
@@ -69,7 +69,11 @@ Also included is template.yml and buildspec.yml for use in
 AWS CodeStar with AWS SAM (Serverless Application Model)
 
 More info:
+
 http://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
+
 https://github.com/awslabs/serverless-application-model/blob/master/HOWTO.md
+
 http://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html
+
 https://docs.aws.amazon.com/codebuild/latest/userguide/concepts.html
