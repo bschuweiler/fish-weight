@@ -54,7 +54,7 @@ def checkArgs(species, length) -> str:
     # Is the species one we handle
     if species not in SPECIES_DETAILS.keys():
         raise ValueError('Species is not one of {0}'.format(
-            SPECIES_DETAILS.keys()))
+            list(SPECIES_DETAILS.keys())))
 
     # Is the length convertible to float
     # Leave this check first for length because other checks treat as float
