@@ -5,6 +5,14 @@ import json
 import statistics
 import sys
 
+try:
+    import importlib.resources as pkg_resources
+except ImportError:
+    # Try backported to PY<37 `importlib_resources`.
+    import importlib_resources as pkg_resources
+
+import fish_weight.data
+
 
 WALLEYE_LENGTH_LOWER_LIMIT = 8
 WALLEYE_LENGTH_UPPER_LIMIT = 35
@@ -15,17 +23,17 @@ SMALLMOUTH_LENGTH_UPPER_LIMIT = 25
 
 SPECIES_DETAILS = {
     'walleye': {
-        'file': 'data/walleye.json',
+        'file': 'walleye.json',
         'lower': WALLEYE_LENGTH_LOWER_LIMIT,
         'upper': WALLEYE_LENGTH_UPPER_LIMIT
     },
     'northern': {
-        'file': 'data/northern.json',
+        'file': 'northern.json',
         'lower': NORTHERN_LENGTH_LOWER_LIMIT,
         'upper': NORTHERN_LENGTH_UPPER_LIMIT
     },
     'smallmouth': {
-        'file': 'data/smallmouth.json',
+        'file': 'smallmouth.json',
         'lower': SMALLMOUTH_LENGTH_LOWER_LIMIT,
         'upper': SMALLMOUTH_LENGTH_UPPER_LIMIT
     }
@@ -84,15 +92,16 @@ def lengthToWeight(species, length) -> str:
     # because lookup tables don't use them
     length = length.rstrip('0').rstrip('.')
 
-    file = SPECIES_DETAILS.get(species).get('file')
+    file = pkg_resources.open_text(
+        fish_weight.data, SPECIES_DETAILS.get(species).get('file'))
 
-    with open(file) as dataFile:
+    with file as dataFile:
         result = {}
         result['Species'] = species
         result['Length'] = length
 
-        data = json.load(dataFile)
-        record = data.get(length)
+        speciesData = json.load(dataFile)
+        record = speciesData.get(length)
         if not record:
             raise ValueError(
                 'No results in {0} table for length "{1}"'
@@ -116,4 +125,4 @@ def lengthToWeight(species, length) -> str:
 
 
 if __name__ == '__main__':
-    sys.exit(lengthToWeight('Smallmouth', '16'))
+    sys.exit(lengthToWeight('smallmouth', '16'))

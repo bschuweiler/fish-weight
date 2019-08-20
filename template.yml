@@ -1,39 +1,42 @@
-AWSTemplateFormatVersion: 2010-09-09
-Transform:
-- AWS::Serverless-2016-10-31
-- AWS::CodeStar
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  fish-weight
 
-Metadata:
-  CodeBuildImage: aws/codebuild/python:3.6.5
-  CodeBuildImageOverride: aws/codebuild/python:3.6.5
+  Simple fish length to weight coverter
 
-Parameters:
-  ProjectId:
-    Type: String
-    Description: CodeStar projectId used to associate new resources to team members
-
-# Enable blue/green deployments using this Globals section. For instructions, see the AWS CodeStar User Guide:
-# https://docs.aws.amazon.com/codestar/latest/userguide/how-to-modify-serverless-project.html?icmpid=docs_acs_rm_tr
-#
-# Globals:
-#   Function:
-#     AutoPublishAlias: live
-#     DeploymentPreference:
-#       Enabled: true
-#       Type: Canary10Percent5Minutes
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
 
 Resources:
-  FishWeight:
+  FishWeightFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: index.handler
-      Runtime: python3.6
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      CodeUri: fish_weight/
+      Handler: app.lambda_handler
+      Runtime: python3.7
       Events:
-        GetEvent:
-          Type: Api
+        FishWeight:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /fishweight/{species}/{length}
             Method: get
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  FishWeightApi:
+    Description: "API Gateway endpoint URL for Prod stage for Fish Weight function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  FishWeightFunction:
+    Description: "Fish Weight Lambda Function ARN"
+    Value: !GetAtt FishWeightFunction.Arn
+  FishWeightFunctionIamRole:
+    Description: "Implicit IAM Role created for Fish Weight function"
+    Value: !GetAtt FishWeightFunctionRole.Arn

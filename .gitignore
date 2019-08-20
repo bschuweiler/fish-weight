@@ -4,3 +4,6 @@
 .vscode
 .DS_store
 .Python
+.aws
+.aws-sam
+.pytest_cache
