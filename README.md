@@ -63,9 +63,9 @@ all tables with a value
 Deploy as AWS Lambda
 --------------------
 
-For running as an AWS Lambda function, utilize index.handler
+For running as an AWS Lambda function, utilize fish_weight.app.lambda_handler()
 
-Also included is template.yml and buildspec.yml for use in 
+Also included is template.yml for use in 
 AWS CodeStar with AWS SAM (Serverless Application Model)
 
 More info:
