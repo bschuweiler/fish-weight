@@ -25,7 +25,7 @@ https://www.dec.ny.gov/outdoor/9222.html
 Requirements
 ------------
 
-Python 3.6
+Python 3.7
 
 
 Usage
